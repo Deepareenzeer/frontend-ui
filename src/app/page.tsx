@@ -78,8 +78,8 @@ export default function BunnyCalcPage() {
       const closeBrackets = (expression.match(/\)/g) || []).length;
       const finalExpression = expression + ")".repeat(openBrackets - closeBrackets);
       const encodedExpression = encodeURIComponent(finalExpression);
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
-      const url = `${apiUrl}/api/calculator/evaluate?expression=${encodedExpression}&mode=${angleMode}`;
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://java-engine-1.onrender.com";
+      const url = `${apiUrl}/calculator/evaluate?expression=${encodedExpression}&mode=${angleMode}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error(await response.text() || "Error");
       const result: number = await response.json();

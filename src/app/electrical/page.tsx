@@ -34,8 +34,8 @@ export default function ElectricalPage() {
 
     const params = new URLSearchParams({ v: voltage, i: current, r: resistance, p: power }).toString();
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
-      const response = await fetch(`${apiUrl}/api/electrical/calculate?${params}`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://java-engine-1.onrender.com";
+      const response = await fetch(`${apiUrl}/electrical/calculate?${params}`);
       if (!response.ok) throw new Error(await response.text());
       const data = await response.json();
       setResults(data);

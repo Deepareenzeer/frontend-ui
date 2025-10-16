@@ -33,11 +33,77 @@ export default function ConverterPage() {
   };
 
   const unitMapToBackend: Record<string, string> = {
-    // เวลา
+    // Length
+    meter: "m",
+    kilometer: "km",
+    centimeter: "cm",
+    millimeter: "mm",
+    mile: "mi",
+    yard: "yd",
+    foot: "ft",
+    inch: "in",
+    
+    // Mass
+    gram: "g",
+    kilogram: "kg",
+    milligram: "mg",
+    pound: "lb",
+    ounce: "oz",
+    
+    // Area
+    square_meter: "m2",
+    square_kilometer: "km2",
+    square_mile: "sq-mi",
+    hectare: "ha",
+    acre: "ac",
+    
+    // Time
     second: "s",
     minute: "min",
     hour: "h",
-    day: "day", // <-- ต้องตรงกับ backend
+    day: "d",
+    
+    // Speed
+    meter_per_second: "m/s",
+    kilometer_per_hour: "km/h",
+    mile_per_hour: "mph",
+    
+    // Energy
+    joule: "J",
+    kilojoule: "kJ",
+    calorie: "cal",
+    kilocalorie: "kcal",
+  };
+
+  const checkReasonable = (category: string, fromUnit: string, toUnit: string, value: number, convertedValue: number): string | null => {
+    
+    switch (category) {
+      case "time":
+        if (fromUnit === "hour" && toUnit === "day") {
+          if (convertedValue > 30) return "Result seems too high for the input hours.";
+          if (convertedValue < 0.01) return "Result seems too small for the input hours.";
+        }
+        break;
+
+      case "length":
+        if (convertedValue > 1e6) return "Result is unusually large for length.";
+        if (convertedValue < 1e-6) return "Result is unusually small for length.";
+        break;
+
+      case "mass":
+        if (convertedValue > 1e6) return "Result is unusually large for mass.";
+        if (convertedValue < 1e-6) return "Result is unusually small for mass.";
+        break;
+
+      case "energy":
+        if (convertedValue > 1e8) return "Result seems too high for energy.";
+        if (convertedValue < 1e-3) return "Result seems too low for energy.";
+        break;
+
+      // เพิ่มหมวดอื่น ๆ ได้ตามต้องการ
+    }
+
+    return null; // ✅ ถ้าผลลัพธ์สมเหตุสมผล
   };
 
   // ✅ ถ้าใส่ครบ 4 ช่อง จะโชว์แจ้งเตือน
@@ -85,8 +151,8 @@ export default function ConverterPage() {
     setResult("...");
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
-      const response = await fetch(`${apiUrl}/api/converter/convert`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://java-engine-1.onrender.com";
+      const response = await fetch(`${apiUrl}/unit/converter/convert`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

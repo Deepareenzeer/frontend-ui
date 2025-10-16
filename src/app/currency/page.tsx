@@ -23,7 +23,7 @@ export default function CurrencyPage() {
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
-        const response = await fetch("http://localhost:8081/api/currency/currencies");
+        const response = await fetch("https://java-engine-1.onrender.com/currency/currencies");
         if (!response.ok) throw new Error("Could not connect to currency service.");
         const data = await response.json();
         setCurrencies(Object.keys(data));
@@ -61,8 +61,8 @@ export default function CurrencyPage() {
     setResult("Converting...");
     setRateInfo("");
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
-      const url = `${apiUrl}/api/currency/convert?from=${fromCurrency.value}&to=${toCurrency.value}&amount=${valueNum}`;
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://java-engine-1.onrender.com";
+      const url = `${apiUrl}/currency/convert?from=${fromCurrency.value}&to=${toCurrency.value}&amount=${valueNum}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error(await response.text());
       const data: { convertedAmount: number; rate: number } = await response.json();
