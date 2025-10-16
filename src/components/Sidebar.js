@@ -35,8 +35,8 @@ export default function Sidebar() {
           <Image
             src="/images/a1.svg" // ระบุ path ไปยังไฟล์ Logo ใน public folder
             alt="BunnyCalc Logo"
-            width={50} // กำหนดความกว้างของ Logo
-            height={50} // กำหนดความสูงของ Logo (สำคัญสำหรับ Next/Image)
+            width={200} // กำหนดความกว้างของ Logo
+            height={200} // กำหนดความสูงของ Logo (สำคัญสำหรับ Next/Image)
             className={styles.logoImage} 
           />
           
