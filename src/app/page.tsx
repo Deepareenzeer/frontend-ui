@@ -26,7 +26,7 @@ export default function BunnyCalcPage() {
 
   useEffect(() => {
     // ป้องกันไม่ให้ข้อความน่ารักๆ ถูกเขียนทับทันที
-    if (display !== "I ❤️ U" && !cuteMessages.includes(display) && display !== "Clean! ✨" && display !== "Bunny งงแล้ว~") {
+    if (display !== "I ❤️ U" && !cuteMessages.includes(display) && display !== "Clean! ✨" && display !== "Pony งงแล้ว~") {
       setDisplay(expression || "0");
     }
   }, [expression, display]);
