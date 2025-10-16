@@ -1,0 +1,181 @@
+/* ==== Layout หลักของหน้า ==== */
+.pageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 0rem);
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); /* พื้นหลังไล่สีชมพู-ฟ้าพาสเทล */
+}
+
+
+/* ==== Card หลักของเครื่องคิดเลข ==== */
+.container {
+  width: 100%;
+  max-width: 40rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ==== Title & Subtitle ==== */
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 0;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: -1rem;
+  color: #581c87;
+  font-weight: 500;
+}
+
+/* --- ส่วนที่แก้ไข --- */
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* ระยะห่างระหว่างกลุ่ม V/I และ R/P */
+  width: 100%;
+}
+
+.groupTitle {
+  font-weight: 600;
+  color: #581c87;
+  border-bottom: 2px solid rgba(168, 85, 247, 0.3);
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.inputRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 ช่องเท่าๆ กัน */
+  gap: 1.5rem;
+}
+/* --- จบส่วนที่แก้ไข --- */
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputLabel {
+  font-weight: 600;
+  color: #581c87;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.inputBox {
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  background: #fef9c3;
+  color: #374151;
+}
+
+.inputBox:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+}
+
+/* ==== Buttons ==== */
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.calculateButton, .resetButton {
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-grow: 1;
+}
+
+.calculateButton {
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+}
+
+.calculateButton:hover {
+  background: linear-gradient(90deg, #9333ea, #db2777);
+  transform: scale(1.05);
+}
+
+.resetButton {
+  background: linear-gradient(90deg, #f87171, #f43f5e);
+}
+
+.resetButton:hover {
+  background: linear-gradient(90deg, #dc2626, #be123c);
+  transform: scale(1.05);
+}
+
+/* ==== Result Section ==== */
+.resultBox {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.resultTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 0;
+  color: #581c87;
+}
+
+.resultGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.resultCard {
+  background-color: #f3e8ff;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.resultLabel {
+  margin: 0;
+  font-weight: 500;
+  color: #7e22ce;
+}
+
+.resultValue {
+  margin: 0.25rem 0 0 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #581c87;
+}
+
+.errorValue {
+  color: #ef4444;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+}

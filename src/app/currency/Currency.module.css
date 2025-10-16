@@ -1,0 +1,181 @@
+/* ==== Layout หลักของหน้า ==== */
+.pageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 0rem);
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); /* พื้นหลังไล่สีชมพู-ฟ้าพาสเทล */
+}
+
+
+/* ==== Card หลัก ==== */
+.container {
+  width: 100%;
+  max-width: 32rem; /* ปรับขนาดให้พอดี */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* ==== Title ==== */
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 0;
+}
+
+.converterBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ==== Input Group ==== */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.inputLabel {
+  font-weight: 600;
+  color: #581c87;
+  font-size: 0.9rem;
+  padding-left: 0.25rem;
+}
+
+.numberInput {
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+  background: #fef9c3;
+  color: #374151;
+}
+
+.numberInput:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+}
+
+.searchableSelect {
+  width: 100%;
+}
+
+/* ==== Swap Button ==== */
+.swapButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background-color: white;
+  color: #a855f7;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.swapButton:hover {
+  background-color: #f3e8ff;
+  transform: rotate(180deg) scale(1.1);
+}
+
+/* ==== Result Box (ส่วนแสดงผลใหม่) ==== */
+.resultBox {
+  width: 100%;
+  min-height: 80px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.resultAmount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #581c87;
+  margin: 0;
+  line-height: 1;
+}
+
+.resultCurrency {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #7e22ce;
+  margin: 0;
+}
+
+.rateInfo {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #581c87;
+  margin-top: -0.5rem; /* ดึงขึ้นมาเล็กน้อย */
+}
+
+.errorValue {
+  color: #ef4444;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding-top: 1rem;
+}
+
+/* ==== Button Group ==== */
+.buttonGroup {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.convertButton, .resetButton {
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-grow: 1;
+  font-size: 1.1rem;
+}
+
+.convertButton {
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+}
+
+.convertButton:hover {
+  background: linear-gradient(90deg, #9333ea, #db2777);
+  transform: scale(1.05);
+}
+
+.resetButton {
+  background: linear-gradient(90deg, #f87171, #f43f5e);
+}
+
+.resetButton:hover {
+  background: linear-gradient(90deg, #dc2626, #be123c);
+  transform: scale(1.05);
+}

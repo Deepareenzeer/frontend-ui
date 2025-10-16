@@ -1,0 +1,144 @@
+/* ==== Sidebar Container ==== */
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.5); /* พื้นหลังกระจกฝ้า */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1.5rem;
+  transition: transform 0.3s ease-in-out;
+  z-index: 40;
+}
+
+.closed {
+  transform: translateX(-100%);
+}
+
+.open {
+  transform: translateX(0);
+}
+
+/* ==== Title ==== */
+.title {
+  display: flex;
+  align-items: center;
+  gap: -10rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2.5rem;
+  padding-left: 0.5rem;
+}
+
+.titleIcon {
+  color: #ec4899; /* สีไอคอนให้เข้ากับ Gradient */
+}
+
+/* ==== Navigation List ==== */
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* ระยะห่างระหว่างลิงก์ */
+}
+
+/* ==== Navigation Link ==== */
+.link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  top: -50;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  color: #581c87; /* สีม่วงเข้ม */
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.link:hover {
+  background-color: rgba(243, 232, 255, 0.6); /* สีม่วงอ่อนโปร่งใส */
+  color: #7e22ce;
+}
+
+/* ==== Active Link Style ==== */
+.active {
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 15px -5px rgba(168, 85, 247, 0.5);
+}
+
+.active .icon {
+  color: white; /* ไอคอนในลิงก์ที่ active เป็นสีขาว */
+}
+
+.icon {
+  color: #9333ea; /* สีไอคอนปกติ */
+  transition: color 0.2s ease;
+}
+
+.linkText {
+  white-space: nowrap;
+}
+
+/* ==== Toggle Button (ปุ่มเมนู) ==== */
+.toggleBtn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #581c87;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.toggleBtn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.1);
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    /* บนมือถือ, ซ่อน sidebar เป็นค่าเริ่มต้น */
+    transform: translateX(-100%);
+  }
+
+  .open {
+    transform: translateX(0);
+  }
+
+  /* ปรับให้ Toggle Button ขยับตาม sidebar */
+  .open + .toggleBtn {
+    transform: translateX(280px);
+  }
+}
+
+.logoImage {
+  width: 500px;       /* ปรับความกว้างได้ตามใจชอบ */
+  height: 400px;      /* ปรับความสูงได้ตามใจชอบ */
+  margin-right: 1rem; /* ระยะห่างระหว่าง Logo กับข้อความ */
+  object-fit: contain; 
+  /* ป้องกันไม่ให้ภาพบิดเบี้ยว */
+}

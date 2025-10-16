@@ -1,0 +1,225 @@
+/* ==== Layout หลักของหน้า ==== */
+.pageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 0rem);
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); /* พื้นหลังไล่สีชมพู-ฟ้าพาสเทล */
+}
+
+
+/* ==== Card หลัก ==== */
+.container {
+  width: 100%;
+  max-width: 32rem; /* ปรับขนาดให้พอดี */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* ==== Title ==== */
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 0;
+}
+
+/* ==== Category Selector ==== */
+.categoryGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.mainLabel {
+  font-weight: 600;
+  color: #581c87;
+  font-size: 1rem;
+}
+
+.categorySelect {
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 1rem;
+  background: #f3e8ff;
+  color: #581c87;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.categorySelect:focus {
+  border-color: #a855f7;
+}
+
+/* ==== Input Group ==== */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.inputLabel {
+  font-weight: 600;
+  color: #581c87;
+  font-size: 0.9rem;
+  padding-left: 0.25rem;
+}
+
+.numberInput {
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #fef9c3;
+  color: #374151;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  width: 100%;
+}
+
+.unitSelectFull {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #fef9c3;
+  color: #374151;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  text-transform: capitalize;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+/* ==== Swap Button ==== */
+.swapButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  color: #a855f7;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out, background-color 0.2s ease;
+}
+
+.swapButton:hover {
+  background-color: #f3e8ff;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* ==== Result Box ==== */
+.resultBox {
+  width: 100%;
+  background-color: #f3e8ff;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.resultAmount {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #581c87;
+  margin: 0;
+  line-height: 1;
+}
+
+.resultUnit {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #7e22ce;
+  margin: 0.25rem 0 0 0;
+  text-transform: capitalize;
+}
+
+.errorValue {
+  color: #ef4444;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1rem 0;
+}
+
+/* ==== Button Group ==== */
+.buttonGroup {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.convertButton, .resetButton {
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-grow: 1;
+  font-size: 1.1rem;
+}
+
+.convertButton {
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+  box-shadow: 0 4px 15px -5px rgba(168, 85, 247, 0.5);
+}
+
+.convertButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px -5px rgba(168, 85, 247, 0.6);
+}
+
+.resetButton {
+  background: linear-gradient(90deg, #f87171, #f43f5e);
+}
+
+.resetButton:hover {
+  background: linear-gradient(90deg, #dc2626, #be123c);
+  transform: scale(1.05);
+}
+
+.unitSelectFull:invalid {
+  color: #757575; /* สีเทาจางๆ (gray-400) */
+}
+
+/* กฎสำหรับซ่อน placeholder ออกจากรายการตัวเลือก */
+.unitSelectFull option[value=""][disabled] {
+  display: none;
+}

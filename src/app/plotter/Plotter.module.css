@@ -1,0 +1,176 @@
+/* ==== Layout พื้นฐาน ==== */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);  /* 💖 ไล่สีแบบหัวข้อ */
+  color: #581c87; /* สีตัวอักษร */
+  font-family: "Poppins", sans-serif;
+}
+
+/* ==== Title ==== */
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* ==== Tabs ==== */
+.tabsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tabButton {
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: #4b5563;
+  backdrop-filter: blur(6px);
+}
+
+.tabButton:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.03);
+}
+
+.tabActive {
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+  color: white;
+  border: none;
+}
+
+/* ==== Input Group ==== */
+.inputGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.inputLabel {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.inputField,
+.rangeInput {
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.inputField:focus,
+.rangeInput:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+/* ==== Plot Button ==== */
+.plotButton {
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.plotButton:hover {
+  background: linear-gradient(90deg, #9333ea, #db2777);
+  transform: scale(1.05);
+}
+
+/* ==== Complex Section ==== */
+.complexInputContainer {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.complexNote {
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+/* ==== Plot Area ==== */
+.plotArea {
+  width: 100%;
+  height: 80vh; /* กราฟสูงเต็มเกือบทั้งจอ */
+  margin-top: 1rem;
+  border-radius: 1rem;
+  background: #fffafc;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.message {
+  color: #6b7280;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.error {
+  color: #ef4444;
+}
+
+
+.inputField,
+.rangeInput {
+  background: #fef9c3; /* 🔆 พื้นหลังเหลืองอ่อน พาสเทล */
+  color: #374151;
+}
+
+.resetButton {
+  background: linear-gradient(90deg, #f87171, #f43f5e);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.resetButton:hover {
+  background: linear-gradient(90deg, #dc2626, #be123c);
+  transform: scale(1.05);
+}
+
+.implicitInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.rangeGroup {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}

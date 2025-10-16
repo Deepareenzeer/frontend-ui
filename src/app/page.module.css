@@ -1,0 +1,130 @@
+/* ==== Layout หลักของหน้า ==== */
+.pageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 0rem);
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); /* พื้นหลังไล่สีชมพู-ฟ้าพาสเทล */
+}
+
+/* ==== Card หลัก (เครื่องคิดเลข) ==== */
+.container {
+  width: 100%;
+  max-width: 42rem;
+  background: rgba(128, 176, 221, 0.6); /* พื้นหลังกระจกฝ้า */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 2rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ==== Display Frame & Screen ==== */
+.displayFrame {
+  border-radius: 1.5rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.displayBox {
+  width: 100%;
+  background-color: #2c3e50;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: right;
+  font-size: 2.75rem;
+  font-family: 'Segoe UI Mono', 'Consolas', monospace;
+  font-weight: 500;
+  color: #ecf0f1; /* สีขาวนวล */
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* ==== Scientific Button Grid (ส่วนบน) ==== */
+.scientificGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  
+}
+
+/* ==== Main Button Grid (ส่วนล่าง) ==== */
+.buttonGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+/* ==== Base Button Style ==== */
+.calcButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  border: none;
+  border-radius: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.5);
+  color: #34495e; /* สีเทาเข้ม */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.calcButton:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.calcButton:active {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(0.98);
+}
+
+/* ==== Button Types ==== */
+.calcDefault { /* Numbers and dot */
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.calcOp { /* +, -, *, /, % */
+  background: rgba(255, 165, 0, 0.7); /* สีส้ม */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.calcClear { /* AC, DEL */
+  background: rgba(255, 107, 107, 0.7); /* สีแดงอ่อน */
+  color: white;
+  font-weight: 600;
+}
+
+.calcFunc { /* sin, cos, etc. */
+  background: rgba(255, 255, 255, 0.3);
+  color: #34495e;
+  font-size: 1rem;
+}
+
+.calcEquals {
+  color: white;
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #5494be 0%, #df83df 100%); /* ไล่สีม่วง-น้ำเงิน */
+}
+
+.activeRing {
+  box-shadow: 0 0 0 3px #667eea;
+}
+
+/* Grid Span Utilities */
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
