@@ -2,13 +2,12 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import styles from "./Plotter.module.css";
-import type { Layout, Data } from "plotly.js";
 
-// แก้ไข dynamic import แบบถูกต้อง
+// Dynamic import แบบไม่มี type checking
 const Plot = dynamic(() => import("react-plotly.js"), { 
   ssr: false,
   loading: () => <p>Loading chart...</p>
-});
+}) as any;
 
 export default function PlotterPage() {
   const [plotType, setPlotType] = useState("2d");
@@ -28,8 +27,8 @@ export default function PlotterPage() {
   const [uExpression, setUExpression] = useState("");
   const [vExpression, setVExpression] = useState("");
 
-  const [plotData, setPlotData] = useState<Data[]>([]);
-  const [plotLayout, setPlotLayout] = useState<Partial<Layout>>({
+  const [plotData, setPlotData] = useState<any[]>([]);
+  const [plotLayout, setPlotLayout] = useState<any>({
     title: {
       text: "BunnyCalc Plotter"
     },
@@ -77,12 +76,12 @@ export default function PlotterPage() {
       const data = await response.json();
       setPlotData([
         {
-          x: data.map((p: { x: number }) => p.x),
-          y: data.map((p: { y: number }) => p.y),
+          x: data.map((p: any) => p.x),
+          y: data.map((p: any) => p.y),
           type: "scatter",
           mode: "lines",
           line: { color: "#a855f7", width: 4 },
-        } as Data,
+        },
       ]);
       setPlotLayout({
         title: {
@@ -92,8 +91,7 @@ export default function PlotterPage() {
         plot_bgcolor: "#fef3c7",
       });
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "An error occurred";
-      setError(errorMessage);
+      setError(err instanceof Error ? err.message : "An error occurred");
       setPlotData([]);
     } finally {
       setIsLoading(false);
@@ -123,7 +121,7 @@ export default function PlotterPage() {
           type: "contour",
           contours: { coloring: "lines", start: 0, end: 0, size: 0 },
           line: { color: "#ef4444", width: 4 },
-        } as Data,
+        },
       ]);
       setPlotLayout({
         title: {
@@ -135,8 +133,7 @@ export default function PlotterPage() {
         yaxis: { scaleratio: 1 },
       });
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "An error occurred";
-      setError(errorMessage);
+      setError(err instanceof Error ? err.message : "An error occurred");
       setPlotData([]);
     } finally {
       setIsLoading(false);
@@ -158,7 +155,7 @@ export default function PlotterPage() {
         z: data.z, 
         type: "surface", 
         colorscale: "Viridis" 
-      } as Data]);
+      }]);
       setPlotLayout({
         title: {
           text: `Graph of z = ${expression3d}`
@@ -166,8 +163,7 @@ export default function PlotterPage() {
         paper_bgcolor: "#fce7f3",
       });
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "An error occurred";
-      setError(errorMessage);
+      setError(err instanceof Error ? err.message : "An error occurred");
       setPlotData([]);
     } finally {
       setIsLoading(false);
@@ -188,7 +184,7 @@ export default function PlotterPage() {
         type: "heatmap", 
         colorscale: "hsv", 
         showscale: false 
-      } as Data]);
+      }]);
       setPlotLayout({
         title: {
           text: "Complex Plane Plot"
@@ -198,8 +194,7 @@ export default function PlotterPage() {
         yaxis: { visible: false },
       });
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "An error occurred";
-      setError(errorMessage);
+      setError(err instanceof Error ? err.message : "An error occurred");
       setPlotData([]);
     } finally {
       setIsLoading(false);
