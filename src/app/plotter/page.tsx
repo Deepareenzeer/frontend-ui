@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import styles from "./plotter.module.css";
 import type { PlotParams } from "react-plotly.js";
@@ -65,6 +65,34 @@ export default function PlotterPage() {
       plot_bgcolor: "#fef3c7",
     });
   };
+
+    let fetching = false;
+
+    useEffect(() => {
+    const interval = setInterval(async () => {
+        if (fetching) return;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        fetching = true;
+        try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://java-engine-1.onrender.com";
+        const res = await fetch(`${apiUrl}/plotter/2d?expression=x^2&min=-10&max=10`);
+        const data = await res.json();
+        setPlotData([{
+            x: data.map(p => p.x),
+            y: data.map(p => p.y),
+            type: "scatter",
+            mode: "lines",
+            line: { color: "#a855f7", width: 4 }
+        }]);
+        } catch(err) {
+        console.log(err);
+        } finally {
+        fetching = false;
+        }
+    }, 1000);
+
+    return () => clearInterval(interval);
+    }, []);
 
   // Handler for 2D Explicit Plot (URL ถูกต้องอยู่แล้ว)
   const handlePlot2D = async () => {
