@@ -2,19 +2,13 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import styles from "./Plotter.module.css";
-import type { PlotProps } from "react-plotly.js";
+import type { Layout, Data } from "plotly.js";
 
-// แก้ไข dynamic import ให้มี type
-const Plot = dynamic<PlotProps>(() => import("react-plotly.js"), { ssr: false });
-
-// Interface สำหรับ layout
-interface PlotLayout {
-  title: string;
-  paper_bgcolor?: string;
-  plot_bgcolor?: string;
-  xaxis?: object;
-  yaxis?: object;
-}
+// แก้ไข dynamic import แบบถูกต้อง
+const Plot = dynamic(() => import("react-plotly.js"), { 
+  ssr: false,
+  loading: () => <p>Loading chart...</p>
+});
 
 export default function PlotterPage() {
   const [plotType, setPlotType] = useState("2d");
@@ -34,9 +28,11 @@ export default function PlotterPage() {
   const [uExpression, setUExpression] = useState("");
   const [vExpression, setVExpression] = useState("");
 
-  const [plotData, setPlotData] = useState<any[]>([]);
-  const [plotLayout, setPlotLayout] = useState<PlotLayout>({
-    title: "BunnyCalc Plotter",
+  const [plotData, setPlotData] = useState<Data[]>([]);
+  const [plotLayout, setPlotLayout] = useState<Partial<Layout>>({
+    title: {
+      text: "BunnyCalc Plotter"
+    },
     paper_bgcolor: "#fce7f3",
     plot_bgcolor: "#fef3c7",
   });
@@ -58,7 +54,9 @@ export default function PlotterPage() {
     setPlotData([]);
     setError("");
     setPlotLayout({
-      title: "BunnyCalc Plotter",
+      title: {
+        text: "BunnyCalc Plotter"
+      },
       paper_bgcolor: "#fce7f3",
       plot_bgcolor: "#fef3c7",
     });
@@ -68,7 +66,11 @@ export default function PlotterPage() {
     setIsLoading(true);
     setError("");
     try {
-      const params = new URLSearchParams({ expression: expression2d, min: xMin2d, max: xMax2d });
+      const params = new URLSearchParams({ 
+        expression: expression2d, 
+        min: xMin2d, 
+        max: xMax2d 
+      });
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://java-engine-1.onrender.com";
       const response = await fetch(`${apiUrl}/plotter/2d?${params.toString()}`);
       if (!response.ok) throw new Error("Invalid expression or range");
@@ -80,15 +82,18 @@ export default function PlotterPage() {
           type: "scatter",
           mode: "lines",
           line: { color: "#a855f7", width: 4 },
-        },
+        } as Data,
       ]);
       setPlotLayout({
-        title: `Graph of y = ${expression2d}`,
+        title: {
+          text: `Graph of y = ${expression2d}`
+        },
         paper_bgcolor: "#fce7f3",
         plot_bgcolor: "#fef3c7",
       });
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "An error occurred";
+      setError(errorMessage);
       setPlotData([]);
     } finally {
       setIsLoading(false);
@@ -118,17 +123,20 @@ export default function PlotterPage() {
           type: "contour",
           contours: { coloring: "lines", start: 0, end: 0, size: 0 },
           line: { color: "#ef4444", width: 4 },
-        },
+        } as Data,
       ]);
       setPlotLayout({
-        title: `Graph of ${implicitExpression} = 0`,
+        title: {
+          text: `Graph of ${implicitExpression} = 0`
+        },
         paper_bgcolor: "#fce7f3",
         plot_bgcolor: "#fef3c7",
         xaxis: { scaleanchor: "y", scaleratio: 1 },
         yaxis: { scaleratio: 1 },
       });
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "An error occurred";
+      setError(errorMessage);
       setPlotData([]);
     } finally {
       setIsLoading(false);
@@ -144,13 +152,22 @@ export default function PlotterPage() {
       const response = await fetch(`${apiUrl}/plotter/3d?${params.toString()}`); 
       if (!response.ok) throw new Error("Invalid expression");
       const data = await response.json();
-      setPlotData([{ x: data.x, y: data.y, z: data.z, type: "surface", colorscale: "Viridis" }]);
+      setPlotData([{ 
+        x: data.x, 
+        y: data.y, 
+        z: data.z, 
+        type: "surface", 
+        colorscale: "Viridis" 
+      } as Data]);
       setPlotLayout({
-        title: `Graph of z = ${expression3d}`,
+        title: {
+          text: `Graph of z = ${expression3d}`
+        },
         paper_bgcolor: "#fce7f3",
       });
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "An error occurred";
+      setError(errorMessage);
       setPlotData([]);
     } finally {
       setIsLoading(false);
@@ -166,15 +183,23 @@ export default function PlotterPage() {
       const response = await fetch(`${apiUrl}/plotter/complex?${params.toString()}`);
       if (!response.ok) throw new Error("Invalid complex function expressions");
       const data = await response.json();
-      setPlotData([{ z: data.brightness, type: "heatmap", colorscale: "hsv", showscale: false }]);
+      setPlotData([{ 
+        z: data.brightness, 
+        type: "heatmap", 
+        colorscale: "hsv", 
+        showscale: false 
+      } as Data]);
       setPlotLayout({
-        title: "Complex Plane Plot",
+        title: {
+          text: "Complex Plane Plot"
+        },
         paper_bgcolor: "#fce7f3",
         xaxis: { visible: false },
         yaxis: { visible: false },
       });
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "An error occurred";
+      setError(errorMessage);
       setPlotData([]);
     } finally {
       setIsLoading(false);
@@ -186,19 +211,57 @@ export default function PlotterPage() {
       <h1 className={styles.title}>Graph Plotter</h1>
 
       <div className={styles.tabsContainer}>
-        <button onClick={() => setPlotType("2d")} className={`${styles.tabButton} ${plotType === "2d" ? styles.tabActive : ""}`}>2D Explicit</button>
-        <button onClick={() => setPlotType("implicit")} className={`${styles.tabButton} ${plotType === "implicit" ? styles.tabActive : ""}`}>2D Implicit</button>
-        <button onClick={() => setPlotType("3d")} className={`${styles.tabButton} ${plotType === "3d" ? styles.tabActive : ""}`}>3D</button>
-        <button onClick={() => setPlotType("complex")} className={`${styles.tabButton} ${plotType === "complex" ? styles.tabActive : ""}`}>Complex</button>
+        <button 
+          onClick={() => setPlotType("2d")} 
+          className={`${styles.tabButton} ${plotType === "2d" ? styles.tabActive : ""}`}
+        >
+          2D Explicit
+        </button>
+        <button 
+          onClick={() => setPlotType("implicit")} 
+          className={`${styles.tabButton} ${plotType === "implicit" ? styles.tabActive : ""}`}
+        >
+          2D Implicit
+        </button>
+        <button 
+          onClick={() => setPlotType("3d")} 
+          className={`${styles.tabButton} ${plotType === "3d" ? styles.tabActive : ""}`}
+        >
+          3D
+        </button>
+        <button 
+          onClick={() => setPlotType("complex")} 
+          className={`${styles.tabButton} ${plotType === "complex" ? styles.tabActive : ""}`}
+        >
+          Complex
+        </button>
         <button onClick={resetFields} className={styles.resetButton}>Reset</button>
       </div>
 
       {plotType === "2d" && (
         <div className={styles.inputGroup}>
           <span className={styles.inputLabel}>y =</span>
-          <input type="text" value={expression2d} onChange={(e) => setExpression2d(e.target.value)} className={styles.inputField} placeholder="e.g., x^2" />
-          <input type="number" value={xMin2d} onChange={(e) => setXMin2d(e.target.value)} className={styles.rangeInput} placeholder="x min e.g., -10" />
-          <input type="number" value={xMax2d} onChange={(e) => setXMax2d(e.target.value)} className={styles.rangeInput} placeholder="x max e.g., 10" />
+          <input 
+            type="text" 
+            value={expression2d} 
+            onChange={(e) => setExpression2d(e.target.value)} 
+            className={styles.inputField} 
+            placeholder="e.g., x^2" 
+          />
+          <input 
+            type="number" 
+            value={xMin2d} 
+            onChange={(e) => setXMin2d(e.target.value)} 
+            className={styles.rangeInput} 
+            placeholder="x min e.g., -10" 
+          />
+          <input 
+            type="number" 
+            value={xMax2d} 
+            onChange={(e) => setXMax2d(e.target.value)} 
+            className={styles.rangeInput} 
+            placeholder="x max e.g., 10" 
+          />
           <button onClick={handlePlot2D} className={styles.plotButton}>Plot</button>
         </div>
       )}
@@ -207,15 +270,45 @@ export default function PlotterPage() {
         <div className={styles.implicitInputContainer}>
           <div className={styles.inputGroup}>
             <span className={styles.inputLabel}>Equation:</span>
-            <input type="text" value={implicitExpression} onChange={(e) => setImplicitExpression(e.target.value)} className={styles.inputField} placeholder="e.g., x^2 + y^2 - 16" />
+            <input 
+              type="text" 
+              value={implicitExpression} 
+              onChange={(e) => setImplicitExpression(e.target.value)} 
+              className={styles.inputField} 
+              placeholder="e.g., x^2 + y^2 - 16" 
+            />
             <span className={styles.inputLabel}>= 0</span>
             <button onClick={handlePlotImplicit} className={styles.plotButton}>Plot</button>
           </div>
           <div className={styles.rangeGroup}>
-            <input type="number" value={xMinImplicit} onChange={e => setXMinImplicit(e.target.value)} className={styles.rangeInput} placeholder="x min e.g., -10" />
-            <input type="number" value={xMaxImplicit} onChange={e => setXMaxImplicit(e.target.value)} className={styles.rangeInput} placeholder="x max e.g., 10" />
-            <input type="number" value={yMinImplicit} onChange={e => setYMinImplicit(e.target.value)} className={styles.rangeInput} placeholder="y min e.g., -10" />
-            <input type="number" value={yMaxImplicit} onChange={e => setYMaxImplicit(e.target.value)} className={styles.rangeInput} placeholder="y max e.g., 10" />
+            <input 
+              type="number" 
+              value={xMinImplicit} 
+              onChange={e => setXMinImplicit(e.target.value)} 
+              className={styles.rangeInput} 
+              placeholder="x min e.g., -10" 
+            />
+            <input 
+              type="number" 
+              value={xMaxImplicit} 
+              onChange={e => setXMaxImplicit(e.target.value)} 
+              className={styles.rangeInput} 
+              placeholder="x max e.g., 10" 
+            />
+            <input 
+              type="number" 
+              value={yMinImplicit} 
+              onChange={e => setYMinImplicit(e.target.value)} 
+              className={styles.rangeInput} 
+              placeholder="y min e.g., -10" 
+            />
+            <input 
+              type="number" 
+              value={yMaxImplicit} 
+              onChange={e => setYMaxImplicit(e.target.value)} 
+              className={styles.rangeInput} 
+              placeholder="y max e.g., 10" 
+            />
           </div>
         </div>
       )}
@@ -223,7 +316,13 @@ export default function PlotterPage() {
       {plotType === "3d" && (
         <div className={styles.inputGroup}>
           <span className={styles.inputLabel}>z =</span>
-          <input type="text" value={expression3d} onChange={(e) => setExpression3d(e.target.value)} className={styles.inputField} placeholder="e.g., sin(x)*cos(y)" />
+          <input 
+            type="text" 
+            value={expression3d} 
+            onChange={(e) => setExpression3d(e.target.value)} 
+            className={styles.inputField} 
+            placeholder="e.g., sin(x)*cos(y)" 
+          />
           <button onClick={handlePlot3D} className={styles.plotButton}>Plot</button>
         </div>
       )}
@@ -235,11 +334,23 @@ export default function PlotterPage() {
           </p>
           <div className={styles.inputGroup}>
             <span className={styles.inputLabel}>u(x,y) =</span>
-            <input type="text" value={uExpression} onChange={(e) => setUExpression(e.target.value)} className={styles.inputField} placeholder="e.g., u = x^2-y^2" />
+            <input 
+              type="text" 
+              value={uExpression} 
+              onChange={(e) => setUExpression(e.target.value)} 
+              className={styles.inputField} 
+              placeholder="e.g., u = x^2-y^2" 
+            />
           </div>
           <div className={styles.inputGroup}>
             <span className={styles.inputLabel}>v(x,y) =</span>
-            <input type="text" value={vExpression} onChange={(e) => setVExpression(e.target.value)} className={styles.inputField} placeholder="e.g., v = 2*x*y" />
+            <input 
+              type="text" 
+              value={vExpression} 
+              onChange={(e) => setVExpression(e.target.value)} 
+              className={styles.inputField} 
+              placeholder="e.g., v = 2*x*y" 
+            />
             <button onClick={handlePlotComplex} className={styles.plotButton}>Plot</button>
           </div>
         </div>
@@ -250,8 +361,15 @@ export default function PlotterPage() {
           <p className={styles.message}>Loading...</p>
         ) : error ? (
           <p className={`${styles.message} ${styles.error}`}>{error}</p>
+        ) : plotData.length > 0 ? (
+          <Plot 
+            data={plotData} 
+            layout={plotLayout} 
+            config={{ responsive: true }} 
+            style={{ width: "100%", height: "100%" }}
+          />
         ) : (
-          <Plot data={plotData} layout={plotLayout} config={{ responsive: true }} className="w-full h-full" />
+          <p className={styles.message}>Enter an equation and click Plot</p>
         )}
       </div>
     </div>
