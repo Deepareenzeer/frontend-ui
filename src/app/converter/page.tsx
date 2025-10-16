@@ -152,7 +152,7 @@ export default function ConverterPage() {
 
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://java-engine-1.onrender.com";
-      const response = await fetch(`${apiUrl}/unit/converter/convert`, {
+      const response = await fetch(`${apiUrl}/unit/convert`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
