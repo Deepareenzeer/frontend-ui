@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import styles from "./Plotter.module.css";
+import styles from "./pp.module.css"; // ตรวจสอบว่าชื่อไฟล์ CSS ถูกต้อง
 
 // Dynamic import แบบไม่มี type checking
 const Plot = dynamic(() => import("react-plotly.js"), { 
