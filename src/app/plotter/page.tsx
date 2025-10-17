@@ -37,7 +37,7 @@ export default function PlotterPage() {
 
   const [plotData, setPlotData] = useState<any[]>([]);
   const [plotLayout, setPlotLayout] = useState<PlotLayout>({
-    title: "BunnyCalc Plotter",
+    title: "Pony Plotter",
     paper_bgcolor: "#fce7f3",
     plot_bgcolor: "#fef3c7",
   });
@@ -60,7 +60,7 @@ export default function PlotterPage() {
     setPlotData([]);
     setError("");
     setPlotLayout({
-      title: "BunnyCalc Plotter",
+      title: "Pony Plotter",
       paper_bgcolor: "#fce7f3",
       plot_bgcolor: "#fef3c7",
     });
